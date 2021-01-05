@@ -1,19 +1,21 @@
 import Home from "./HomePage";
-import About from "./AboutPage";
 import Cart from "./CartPage";
 import Checkout from "./CheckoutPage";
 import Error from "./ErrorPage";
-import PrivateRoute from "./PrivateRoute";
+import Private from "./PrivateRoute";
 import Products from "./ProductsPage";
 import SingleProduct from "./SingleProductPage";
+import Register from "./RegisterPage";
+import Login from "./LoginPage";
 
 export {
 	Home,
-	About,
 	Cart,
 	Checkout,
 	Error,
-	PrivateRoute,
+	Private,
 	Products,
 	SingleProduct,
+	Register,
+	Login,
 };
