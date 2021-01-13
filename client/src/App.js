@@ -8,6 +8,9 @@ import { Switch, Route } from "react-router-dom";
 import { loggedInUser } from "./actions/userActions";
 import { auth } from "./firebase";
 import { useDispatch } from "react-redux";
+import UserRoute from "./components/routes/UserRoute";
+import AdminRoute from "./components/routes/AdminRoute";
+
 //using lazy
 const Login = lazy(() => import("./pages/auth/LoginPage"));
 const Register = lazy(() => import("./pages/auth/RegisterPage"));
@@ -17,17 +20,16 @@ const Error = lazy(() => import("./pages/ErrorPage"));
 const Checkout = lazy(() => import("./pages/CheckoutPage"));
 const Cart = lazy(() => import("./pages/CartPage"));
 const Home = lazy(() => import("./pages/HomePage"));
-
+const CategoryHome = lazy(() => import("./pages/category/CategoryHome"));
 const SingleProduct = lazy(() => import("./pages/SingleProductPage"));
-const Category = lazy(() => import("./pages/Category"));
-const SubCategory = lazy(() => import("./pages/Subcategory"));
+
 const Payment = lazy(() => import("./pages/PaymentPage"));
 const Shop = lazy(() => import("./pages/ShopPage"));
 const ProductCreate = lazy(() => import("./pages/admin/product/ProductCreate"));
 const RegisterComplete = lazy(() => import("./pages/auth/RegisterComplete.js"));
 const ForgotPassword = lazy(() => import("./pages/auth/ForgotPassword"));
 const AdminDashboard = lazy(() => import("./pages/admin/AdminDashboard"));
-const UserDashboard = lazy(() => import("./pages/user/UserDashboard"));
+
 const ProductUpdate = lazy(() => import("./pages/admin/product/ProductUpdate"));
 const CategoryUpdate = lazy(() =>
 	import("./pages/admin/category/CategoryUpdate")
@@ -37,15 +39,12 @@ const CategoryCreate = lazy(() =>
 );
 const SubCreate = lazy(() => import("./pages/admin/sub/SubCreate.js"));
 const SubUpdate = lazy(() => import("./pages/admin/sub/SubUpdate.js"));
-const Password = lazy(() => import("./pages/user/Password.js"));
-
-const ShopHistory = lazy(() => import("./pages/user/ShopHistory.js"));
-const Wishlist = lazy(() => import("./pages/user/Wishlist.js"));
+const Account = lazy(() => import("./pages/user/Account.js"));
 
 const App = () => {
 	const dispatch = useDispatch();
 	useEffect(() => {
-		const unsubscribe = auth.onAuthStateChanged((user) => {
+		const unsubscribe = auth.onAuthStateChanged(async (user) => {
 			if (user) {
 				dispatch(loggedInUser(user));
 			}
@@ -78,12 +77,19 @@ const App = () => {
 							/>
 							<Route exact path="/forgot/password" component={ForgotPassword} />
 
-							<Route exact path="/user/shophistory" component={ShopHistory} />
-							<Route exact path="/user/password" component={Password} />
-							<Route exact path="/user/wishlist" component={Wishlist} />
-							<Route exact path="/admin/dashboard" component={AdminDashboard} />
-							<Route exact path="/admin/category" component={CategoryCreate} />
-							<Route
+							<UserRoute exact path="/user/account" component={Account} />
+
+							<AdminRoute
+								exact
+								path="/admin/dashboard"
+								component={AdminDashboard}
+							/>
+							<AdminRoute
+								exact
+								path="/admin/category"
+								component={CategoryCreate}
+							/>
+							<AdminRoute
 								exact
 								path="/admin/category/:slug"
 								component={CategoryUpdate}
@@ -92,8 +98,7 @@ const App = () => {
 							<Route exact path="/admin/sub/:slug" component={SubUpdate} />
 							<Route exact path="/admin/product" component={ProductCreate} />
 							<Route exact path="/admin/products" component={Products} />
-							<Route exact path="/admin/dashboard" component={AdminDashboard} />
-							<Route exact path="/user/dashboard" component={UserDashboard} />
+							<Route exact path="/category/:slug" component={CategoryHome} />
 							<Route
 								exact
 								path="/admin/product/:slug"
@@ -101,12 +106,11 @@ const App = () => {
 							/>
 
 							<Route exact path="/product/:slug" component={SingleProduct} />
-							<Route exact path="/category/:slug" component={Category} />
-							<Route exact path="/sub/:slug" component={SubCategory} />
+
 							<Route exact path="/shop" component={Shop} />
 							<Route exact path="/cart" component={Cart} />
-							<Route exact path="/checkout" component={Checkout} />
-							<Route exact path="/payment" component={Payment} />
+							<UserRoute exact path="/checkout" component={Checkout} />
+							<UserRoute exact path="/payment" component={Payment} />
 							<Route path="*" component={Error} />
 						</Switch>
 					</Suspense>

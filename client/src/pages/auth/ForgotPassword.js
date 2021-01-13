@@ -3,8 +3,7 @@ import { Link } from "react-router-dom";
 import { auth } from "../../firebase";
 import { toast, ToastContainer } from "react-toastify";
 import { Form, Row, Col, Button } from "react-bootstrap";
-import FormContainer from "../../components/forms/FormContainer";
-
+import FormContainer from "../../components/FormContainer";
 import { useSelector } from "react-redux";
 
 import Loader from "../../components/Loader";

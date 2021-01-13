@@ -1,43 +1,58 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Card } from "react-bootstrap";
 
 const AdminNav = () => {
 	return (
-		<nav>
-			<ul className="nav flex-column">
-				<li className="nav-item">
-					<Link to="/admin/dashboard" className="nav-link">
-						Dashboard
-					</Link>
-				</li>
-				<li className="nav-item">
-					<Link to="/admin/product" className="nav-link">
-						Product
-					</Link>
-				</li>
-				<li className="nav-item">
-					<Link to="/admin/products" className="nav-link">
-						Products
-					</Link>
-				</li>
-				<li className="nav-item">
-					<Link to="/admin/category" className="nav-link">
-						Category
-					</Link>
-				</li>
-				<li className="nav-item">
-					<Link to="/admin/sub" className="nav-link">
-						Sub Category
-					</Link>
-				</li>
+		<Card border="primary">
+			<Card.Body>
+				<nav>
+					<ul className="nav flex-column">
+						<li className="nav-item">
+							<Link to="/admin/dashboard" className="nav-link">
+								Dashboard
+								<hr />
+							</Link>
+						</li>
 
-				<li className="nav-item">
-					<Link to="/admin/password" className="nav-link">
-						Password
-					</Link>
-				</li>
-			</ul>
-		</nav>
+						<li className="nav-item">
+							<Link to="/admin/product" className="nav-link">
+								Product
+								<hr />
+							</Link>
+						</li>
+
+						<li className="nav-item">
+							<Link to="/admin/products" className="nav-link">
+								Products
+								<hr />
+							</Link>
+						</li>
+
+						<li className="nav-item">
+							<Link to="/admin/category" className="nav-link">
+								Category
+								<hr />
+							</Link>
+						</li>
+
+						<li className="nav-item">
+							<Link to="/admin/sub" className="nav-link">
+								Sub Category
+								<hr />
+							</Link>
+						</li>
+
+						<li className="nav-item">
+							<Link to="/admin/password" className="nav-link">
+								Password
+								<hr />
+							</Link>
+						</li>
+					</ul>
+				</nav>
+			</Card.Body>
+		</Card>
 	);
 };
 

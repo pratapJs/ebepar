@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { VscLocation, VscAccount, VscCallOutgoing } from "react-icons/vsc";
-import { AiOutlineUserAdd } from "react-icons/ai";
-import SearchForm from "../forms/SearchForm";
+import { AiOutlineUserAdd, AiOutlineLogout } from "react-icons/ai";
+import { RiDashboardLine } from "react-icons/ri";
+import Search from "../forms/Search";
 import firebase from "firebase";
 import { useDispatch, useSelector } from "react-redux";
 import { loggedout } from "../../actions/userActions";
@@ -12,10 +13,9 @@ const AppHeader = ({ history }) => {
 	const dispatch = useDispatch();
 	const { user } = useSelector((state) => ({ ...state }));
 
-	const logOut = () => {
+	const logout = () => {
 		firebase.auth().signOut();
 		dispatch(loggedout());
-		history.push("/login");
 	};
 
 	return (
@@ -65,20 +65,34 @@ const AppHeader = ({ history }) => {
 									</LinkContainer>
 								</NavDropdown>
 							) : (
-								<NavDropdown title="User" id="username">
-									<LinkContainer to="/dashboard">
-										<NavDropdown.Item>Dashboard</NavDropdown.Item>
-									</LinkContainer>
-									<LinkContainer to="/logout">
-										<NavDropdown.Item onClick={logOut}>
-											{" "}
-											Logout{" "}
+								<NavDropdown
+									title={user.name ? user.name.split(" ")[0] : "User"}
+									id="username"
+								>
+									{user && user.role === "admin" ? (
+										<LinkContainer to="/admin/dashboard">
+											<NavDropdown.Item>
+												{" "}
+												<RiDashboardLine /> Admin Dashboard
+											</NavDropdown.Item>
+										</LinkContainer>
+									) : (
+										<LinkContainer to="/user/account">
+											<NavDropdown.Item>
+												{" "}
+												<RiDashboardLine /> Dashboard
+											</NavDropdown.Item>
+										</LinkContainer>
+									)}
+									<LinkContainer to="/">
+										<NavDropdown.Item onClick={logout}>
+											<AiOutlineLogout /> Logout
 										</NavDropdown.Item>
-									</LinkContainer>
+									</LinkContainer>{" "}
 								</NavDropdown>
 							)}
 
-							<SearchForm />
+							<Search />
 						</Nav>
 					</Navbar.Collapse>
 				</Container>

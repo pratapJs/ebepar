@@ -4,8 +4,8 @@ import { auth } from "../../firebase";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { Form, Row, Col, Button } from "react-bootstrap";
-import FormContainer from "../../components/forms/FormContainer";
-import { loggedInUser } from "../../actions/userActions";
+import FormContainer from "../../components/FormContainer";
+import { createOrUpdateUser } from "../../actions/userActions";
 const RegisterComplete = ({ history }) => {
 	//const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
@@ -47,9 +47,9 @@ const RegisterComplete = ({ history }) => {
 				//remove user
 				window.localStorage.removeItem("registerEmail");
 				const user = auth.currentUser;
-				await user.updatePassword(password);
+				//await user.updatePassword(password);
 
-				dispatch(loggedInUser(user));
+				dispatch(createOrUpdateUser(user));
 			}
 			history.push("/");
 		} catch (error) {

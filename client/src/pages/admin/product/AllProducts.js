@@ -1,8 +1,8 @@
 import React from "react";
-import AdminNav from "../../components/nav/AdminNav";
+import AdminNav from "../../../components/nav/AdminNav";
 import { Container, Row, Col } from "react-bootstrap";
 
-const AdminDashboard = () => {
+const Products = () => {
 	return (
 		<Container fluid>
 			<Row>
@@ -10,10 +10,10 @@ const AdminDashboard = () => {
 					<AdminNav />
 				</Col>
 
-				<Col className="mb-3">Admin Dashboard</Col>
+				<Col className="mb-3">All Products</Col>
 			</Row>
 		</Container>
 	);
 };
 
-export default AdminDashboard;
+export default Products;

@@ -4,8 +4,7 @@ import { auth } from "../../firebase";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { Form, Row, Col, Button } from "react-bootstrap";
-import FormContainer from "../../components/forms/FormContainer";
-
+import FormContainer from "../../components/FormContainer";
 const RegisterPage = ({ location, history }) => {
 	//const [name, setName] = useState("");
 	const [email, setEmail] = useState("");

@@ -3,13 +3,14 @@ import { Link } from "react-router-dom";
 import { auth, googleAuthProvider } from "../../firebase";
 import { toast } from "react-toastify";
 import { Form, Row, Col, Button } from "react-bootstrap";
-import FormContainer from "../../components/forms/FormContainer";
+import FormContainer from "../../components/FormContainer";
 import { AiOutlineMail, AiFillGoogleCircle } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
-import { loggedInUser } from "../../actions/userActions";
+import { createOrUpdateUser } from "../../actions/userActions";
+
 import Loader from "../../components/Loader";
 
-const LoginPage = ({ location, history }) => {
+const LoginPage = ({ history }) => {
 	const [password, setPassword] = useState("");
 	const [email, setEmail] = useState("");
 	const [loading, setLoading] = useState(false);
@@ -17,9 +18,18 @@ const LoginPage = ({ location, history }) => {
 	const dispatch = useDispatch();
 
 	const { user } = useSelector((state) => ({ ...state }));
+
+	/* if (user.role === "admin") {
+		history.push("/admin/dashboard");
+	} */
 	useEffect(() => {
 		if (user && user.token) {
 			history.push("/");
+			if (user.role === "admin") {
+				history.push("/admin/dashboard");
+			} else {
+				history.push("/user/account");
+			}
 		}
 	}, [user, history]);
 
@@ -27,24 +37,24 @@ const LoginPage = ({ location, history }) => {
 		e.preventDefault();
 		setLoading(true);
 		try {
-			const result = await auth.signInWithEmailAndPassword(email, password);
-			const { user } = result;
-			dispatch(loggedInUser(user));
-			history.push("/");
+			const { user } = await auth.signInWithEmailAndPassword(email, password);
+
+			dispatch(createOrUpdateUser(user));
+
+			console.log(user);
+			//history.push("/");
 		} catch (error) {
 			console.log(error);
 			toast.error(error.message);
 			setLoading(false);
 		}
-
-		//
 	};
+
 	const handleGoogleLogin = async () => {
 		try {
 			const result = await auth.signInWithPopup(googleAuthProvider);
-			const { user } = result;
-			dispatch(loggedInUser(user));
-			history.push("/");
+
+			dispatch(createOrUpdateUser(result.user));
 		} catch (error) {
 			console.log(error);
 			toast.error(error.message);

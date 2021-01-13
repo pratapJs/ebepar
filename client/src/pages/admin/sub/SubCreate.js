@@ -1,10 +1,18 @@
 import React from "react";
+import AdminNav from "../../../components/nav/AdminNav";
+import { Container, Row, Col } from "react-bootstrap";
 
 const SubCreate = () => {
 	return (
-		<div>
-			<h4>sub category create</h4>
-		</div>
+		<Container fluid>
+			<Row>
+				<Col lg={2} className="mb-3 ">
+					<AdminNav />
+				</Col>
+
+				<Col className="mb-3">Sub Create</Col>
+			</Row>
+		</Container>
 	);
 };
 
