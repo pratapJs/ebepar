@@ -16,9 +16,7 @@ exports.list = async (req, res) =>
 
 exports.read = async (req, res) => {
 	let sub = await Sub.findOne({ slug: req.params.slug }).exec();
-	res.json({
-		sub,
-	});
+	res.json(sub);
 };
 
 exports.update = async (req, res) => {

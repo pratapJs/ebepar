@@ -2,21 +2,19 @@ import React from "react";
 
 import { Form, Button, Row, Col } from "react-bootstrap";
 
-const CategoryForm = ({ name, setName, handleSubmit, buttonName }) => {
+const CategoryForm = ({ name, setName, handleSubmit, buttonName, label }) => {
 	return (
 		<Form onSubmit={handleSubmit}>
 			<Form.Group as={Row} controlId="name">
 				<Form.Label column md="4" lg="3">
-					Category Name:
+					{label}
 				</Form.Label>
 				<Col md="8" lg="9">
 					<Form.Control
 						type="name"
-						placeholder="Enter category name"
+						placeholder="Enter  name"
 						value={name}
 						onChange={(e) => setName(e.target.value)}
-						autoFocus
-						required
 						className="border border-dark"
 					/>{" "}
 				</Col>

@@ -94,9 +94,14 @@ const CategoryCreate = () => {
 						setName={setName}
 						handleSubmit={handleSubmit}
 						buttonName="Save"
+						label="Category Name"
 					/>
 					<br />
-					<SearchForm query={query} setQuery={setQuery} />
+					<SearchForm
+						query={query}
+						setQuery={setQuery}
+						searchText="Search Category"
+					/>
 					<br />
 					{categories.filter(searched(query)).map((c) => (
 						<Card key={c._id}>

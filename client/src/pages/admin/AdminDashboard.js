@@ -6,7 +6,7 @@ const AdminDashboard = () => {
 	return (
 		<Container fluid>
 			<Row>
-				<Col lg={2} className="mb-3 ">
+				<Col lg={3} md={4} className="mb-3 ">
 					<AdminNav />
 				</Col>
 

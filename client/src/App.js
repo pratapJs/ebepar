@@ -31,6 +31,7 @@ const ForgotPassword = lazy(() => import("./pages/auth/ForgotPassword"));
 const AdminDashboard = lazy(() => import("./pages/admin/AdminDashboard"));
 
 const ProductUpdate = lazy(() => import("./pages/admin/product/ProductUpdate"));
+const AllProducts = lazy(() => import("./pages/admin/product/AllProducts"));
 const CategoryUpdate = lazy(() =>
 	import("./pages/admin/category/CategoryUpdate")
 );
@@ -75,7 +76,11 @@ const App = () => {
 								path="/register/complete"
 								component={RegisterComplete}
 							/>
-							<Route exact path="/forgot/password" component={ForgotPassword} />
+							<UserRoute
+								exact
+								path="/forgot/password"
+								component={ForgotPassword}
+							/>
 
 							<UserRoute exact path="/user/account" component={Account} />
 
@@ -94,10 +99,24 @@ const App = () => {
 								path="/admin/category/:slug"
 								component={CategoryUpdate}
 							/>
-							<Route exact path="/admin/sub" component={SubCreate} />
-							<Route exact path="/admin/sub/:slug" component={SubUpdate} />
-							<Route exact path="/admin/product" component={ProductCreate} />
-							<Route exact path="/admin/products" component={Products} />
+							<AdminRoute exact path="/admin/sub" component={SubCreate} />
+							<AdminRoute exact path="/admin/sub/:slug" component={SubUpdate} />
+
+							<AdminRoute
+								exact
+								path="/admin/product"
+								component={ProductCreate}
+							/>
+							<AdminRoute
+								exact
+								path="/admin/products"
+								component={AllProducts}
+							/>
+							<AdminRoute
+								exact
+								path="/admin/products"
+								component={AllProducts}
+							/>
 							<Route exact path="/category/:slug" component={CategoryHome} />
 							<Route
 								exact
